@@ -41,9 +41,9 @@ class ActiveRecord
         $table = static::$table;
         $primaryKey = static::$primaryKey;
 
-        $values = (new QueryBuilder($table))->where($primaryKey, $id)->get()[0];
+        $result = (new QueryBuilder($table))->where($primaryKey, $id)->get()[0];
 
-        return new static($values);
+        return new static($result);
     }
 
     public static function all(): array
@@ -67,11 +67,11 @@ class ActiveRecord
         
         unset($fields[$primaryKey]);
 
-        $insertId = (new QueryBuilder($table))->insert($fields);
+        $result = (new QueryBuilder($table))->insert($fields);
 
-        $this->fields[$primaryKey] = $insertId;
+        $this->fields[$primaryKey] = $result;
 
-        return $insertId;
+        return $result;
     }
 
     public function update(array $data = [], ?int $id = null): bool

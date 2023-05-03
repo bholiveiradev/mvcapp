@@ -61,9 +61,9 @@ class QueryBuilder
         return $stmt->fetchAll();
     }
 
-    public function count(string $field = '*'): int
+    public function count(string $fields = '*'): int
     {
-        $sql = "SELECT COUNT({$field}) as count FROM {$this->table} {$this->where}";
+        $sql = "SELECT COUNT({$fields}) as count FROM {$this->table} {$this->where}";
         $stmt = DB::getInstance()->prepare($sql);
         $stmt->execute($this->bindings);
 
