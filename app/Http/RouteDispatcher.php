@@ -51,7 +51,7 @@ class RouteDispatcher
                         $middlewareObject = new $middleware;
     
                         if (!$middlewareObject instanceof MiddlewareInterface) {
-                            throw new Exception("$middleware must implement MiddlewareInterface");
+                            throw new Exception("{$middleware} must implement MiddlewareInterface");
                         }
     
                         $next = function () use ($request, $response, $middlewareObject, $next) {
