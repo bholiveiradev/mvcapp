@@ -13,7 +13,7 @@ $router->get('/', function ($request) {
 });
 
 // ADMIN GROUP ROUTES
-$router->addMiddlewares([AuthMiddleware::class])->group('/admin', function ($router) {
+$router->middlewares([AuthMiddleware::class])->group('/admin', function ($router) {
     $router->get('/test', TestController::class);
     $router->get('/dashboard', [DashboardController::class, 'index'], [ExampleMiddleware::class]);
     $router->get('/users', [UserController::class, 'index'], [ExampleMiddleware::class]);

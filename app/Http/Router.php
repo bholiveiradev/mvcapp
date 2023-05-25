@@ -10,9 +10,9 @@ class Router
 {
     private array    $routes = [];
     private array    $middlewares = [];
-    private string   $prefix = '';
+    private ?string  $prefix = null;
 
-    public function addRoute(string $method, string $uri, mixed $handler, array $middlewares = []): void
+    private function addRoute(string $method, string $uri, mixed $handler, array $middlewares): void
     {
         $this->routes[] = [
             'method' => $method,
@@ -20,6 +20,17 @@ class Router
             'handler' => $handler,
             'middlewares' => array_merge($this->middlewares, $middlewares),
         ];
+    }
+
+    private function addMiddlewares(array $middlewares): void
+    {
+        $this->middlewares = array_merge($this->middlewares, $middlewares);
+    }
+
+    public function middlewares(array $middlewares = []): self
+    {
+        $this->addMiddlewares($middlewares);
+        return $this;
     }
     
     public function get(string $path, mixed $handler, array $middlewares = []): void
@@ -40,12 +51,6 @@ class Router
     public function delete(string $path, mixed $handler, array $middlewares = []): void
     {
         $this->addRoute('DELETE', $path, $handler, $middlewares);
-    }
-
-    public function addMiddlewares($middlewares = []): self
-    {
-        $this->middlewares = array_merge($this->middlewares, $middlewares);
-        return $this;
     }
 
     public function group(string $prefix, Closure $callback, array $middlewares = []): void
