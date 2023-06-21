@@ -29,9 +29,8 @@ abstract class Controller
 
     protected function view(string $view, array $data = [])
     {
-        $response = new Response();
-        $renderedView = $this->render($view, $data);
+        $renderView = $this->render($view, $data);
         
-        $response->send($renderedView);
+        (new Response())->send($renderView);
     }
 }

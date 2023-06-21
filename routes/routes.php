@@ -1,11 +1,15 @@
 <?php
 
-use App\Controllers\Admin\DashboardController;
-use App\Controllers\Admin\ProductController;
-use App\Controllers\Admin\TestController;
-use App\Controllers\Admin\UserController;
-use App\Middlewares\AuthMiddleware;
-use App\Middlewares\ExampleMiddleware;
+use App\Controllers\Admin\{
+    DashboardController,
+    ProductController,
+    TestController,
+    UserController
+};
+use App\Middlewares\{
+    AuthMiddleware,
+    ExampleMiddleware
+};
 
 // PUBLIC ROUTES
 $router->get('/', function ($request) {

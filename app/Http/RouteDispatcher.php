@@ -9,16 +9,16 @@ use Exception;
 
 class RouteDispatcher
 {
-    private array $routeCollection;
+    private array $routesCollection;
 
     public function __construct(array $routes)
     {
-        $this->routeCollection = $routes;
+        $this->routesCollection = $routes;
     }
 
     public function dispatch(Request $request, Response $response): mixed
     {
-        foreach ($this->routeCollection as $route) {
+        foreach ($this->routesCollection as $route) {
             if ($request->getMethod() === $route['method']) {
                 $pathRegex = $this->pathToRegex($route['uri']);
     
